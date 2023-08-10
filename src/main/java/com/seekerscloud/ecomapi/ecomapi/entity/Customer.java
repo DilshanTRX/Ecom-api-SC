@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Customer {
     @Id
-    @Column(name = "id")
+    @Column(name = "id",unique = true)
     private String id;
     @Column(name = "name")
     private String name;

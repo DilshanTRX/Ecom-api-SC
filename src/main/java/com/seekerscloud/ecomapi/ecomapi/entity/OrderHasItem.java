@@ -1,5 +1,6 @@
 package com.seekerscloud.ecomapi.ecomapi.entity;
 
+import com.seekerscloud.ecomapi.ecomapi.entity.compositekey.OrderHasItemId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +12,17 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+public class OrderHasItem {
+    @EmbeddedId
+    private OrderHasItemId orderHasItemId;
 
-public class Order_Has_Item {
-    @Id
     @ManyToOne
+    @MapsId("orderOrderId")
     @JoinColumn(name = "order_order_id")
     private Orders orderOrderId;
-    @ManyToOne()
+
+    @ManyToOne
+    @MapsId("itemCode")
     @JoinColumn(name = "item_code")
     private Item itemCode;
     @Column(name = "unit_price")
@@ -25,4 +30,9 @@ public class Order_Has_Item {
     @Column(name = "qty")
     private int qty;
 
+    public OrderHasItem(String orderOrderId, int itemCode, double unitPrice, int qty) {
+        this.orderHasItemId = new OrderHasItemId(orderOrderId, itemCode);
+        this.unitPrice = unitPrice;
+        this.qty = qty;
+    }
 }

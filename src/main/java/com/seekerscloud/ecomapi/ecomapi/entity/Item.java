@@ -25,8 +25,10 @@ public class Item {
     private int qty;
     @Column(name = "unit_price")
     private double unitPrice;
-    @Column(name = "barcode")
-    private String barcode;
+    @Column(name = "barcode",length = 65535)
+    @Lob
+    private byte[] barcode;
     @OneToMany(mappedBy = "itemCode",cascade = CascadeType.ALL)
-    private List<Order_Has_Item> ordersList;
+    private List<OrderHasItem> ordersList;
+
 }

@@ -16,12 +16,13 @@ import java.util.List;
 
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "id",unique = true)
     private String id;
     @Column(name = "email")
     private String email;
     @Column(name = "name")
     private String name;
+    @Lob
     @Column(name = "password")
     private String password;
     @OneToMany(mappedBy = "userId",cascade = CascadeType.ALL)

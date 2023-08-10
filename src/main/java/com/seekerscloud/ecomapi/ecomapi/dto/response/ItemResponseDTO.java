@@ -1,6 +1,5 @@
 package com.seekerscloud.ecomapi.ecomapi.dto.response;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerResponseDTO {
-    private String id;
-    private String name;
-    private String address;
-    private double salary;
+public class ItemResponseDTO {
+    private int code;
+    private String description;
+    private int qty;
+    private double unitPrice;
+    private byte[] barcode;
 }

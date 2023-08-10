@@ -1,42 +1,45 @@
 package com.seekerscloud.ecomapi.ecomapi.util;
 
-import com.seekerscloud.ecomapi.ecomapi.dto.core.GeneratedIdentificationDTO;
+
+import com.seekerscloud.ecomapi.ecomapi.repo.CustomerRepo;
+import com.seekerscloud.ecomapi.ecomapi.repo.OrdersRepo;
+import com.seekerscloud.ecomapi.ecomapi.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Random;
-
+@Service
 public class Generator {
-    private final Random RANDOM = new Random();
-    private final String NUMERIC = "0123456789";
-    public final static String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    @Autowired
+    private UserRepo userRepo;
 
-    public Long generateDigits(int length) {
-        return generateRandomDigits(length);
+    @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
+    private OrdersRepo orderRepo;
+
+    public final static String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    public String generateId(int min,int max){
+
+        String stringBuilder = getStringBuilder(min, max).toString();
+        while(userRepo.existsById(stringBuilder) || customerRepo.existsById(stringBuilder) || orderRepo.existsById(stringBuilder)){
+          stringBuilder =  getStringBuilder(min, max).toString();
+        }
+        return stringBuilder;
     }
 
-    private Long generateRandomDigits(int length) {
-        StringBuilder returnValue = new StringBuilder(length);
-
-
-        for (int i = 0; i < length; i++) {
-            returnValue.append(NUMERIC.charAt(RANDOM.nextInt(NUMERIC.length())));
+    private StringBuilder getStringBuilder(int min, int max) {
+        int generatedRand = generateRand(min, max);
+        StringBuilder builder = new StringBuilder();
+        for (int i =0; i < generatedRand; i++){
+            builder.append(ALPHABET.charAt(new Random().nextInt(ALPHABET.length()-1)));
         }
-        return Long.parseLong(returnValue.toString());
+        return builder;
     }
-    public GeneratedIdentificationDTO createId() {
-        StringBuilder sb = new StringBuilder(4);
 
-        //remove spaces & toUppercase
-//            int randomNumber = new Random().nextInt(16 - 1) + 1;
-        for (int i = 0; i < 4; i++) {
-            // generate a random number between
-            int index = (int) (ALPHABET.length() * Math.random());
-            // add Character one by one in end of sb
-            sb.append(ALPHABET.charAt(index));
-        }
-
-        Long digits = generateDigits(8);
-
-        System.out.println("digits "+digits+" "+sb.toString());
-        return new GeneratedIdentificationDTO(digits, sb.toString());
+    private int generateRand(int min, int max){
+        return new Random().nextInt((max-min)+min)+min;
     }
 }

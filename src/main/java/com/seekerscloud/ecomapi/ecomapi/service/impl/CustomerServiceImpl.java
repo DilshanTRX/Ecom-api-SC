@@ -1,13 +1,13 @@
 package com.seekerscloud.ecomapi.ecomapi.service.impl;
 
 import com.seekerscloud.ecomapi.ecomapi.dto.CustomerDTO;
-import com.seekerscloud.ecomapi.ecomapi.dto.core.GeneratedIdentificationDTO;
 import com.seekerscloud.ecomapi.ecomapi.dto.request.CustomerRequestDTO;
 import com.seekerscloud.ecomapi.ecomapi.dto.response.CustomerResponseDTO;
 import com.seekerscloud.ecomapi.ecomapi.dto.response.paginate.PaginatedCustomerResponseDTO;
 import com.seekerscloud.ecomapi.ecomapi.entity.Customer;
 import com.seekerscloud.ecomapi.ecomapi.repo.CustomerRepo;
 import com.seekerscloud.ecomapi.ecomapi.service.CustomerService;
+import com.seekerscloud.ecomapi.ecomapi.util.Generator;
 import com.seekerscloud.ecomapi.ecomapi.util.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -30,19 +30,21 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
-
+    @Autowired
+    private Generator generator;
 
     @Override
-    public String saveCustomer(CustomerRequestDTO dto) {
-        Customer customer= new Customer("",dto.getName(), dto.getAddress(), dto.getSalary(),null);
+    public String createCustomer(CustomerRequestDTO dto) {
+        String generatedId = generator.generateId(5,12);
+        Customer customer= new Customer(generatedId,dto.getName(), dto.getAddress(), dto.getSalary(),null);
         CustomerDTO sDto = new CustomerDTO();
-        return  CustomerRepo.save(customer).getId()+" Saved";
+        return  customerRepo.save(customer).getId()+" Saved";
 
     }
 
     @Override
-    public CustomerResponseDTO findCustomer(int id) throws ClassNotFoundException {
-        Optional<Customer> byId =CustomerRepo.findById(id);
+    public CustomerResponseDTO findCustomer(String id) throws ClassNotFoundException {
+        Optional<Customer> byId =customerRepo.findById(id);
         if(byId.isPresent()){
             return customerMapper.toCustomerResponseDTO(byId.get());
         }
@@ -50,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String updateCustomer(CustomerRequestDTO dto, int id) throws ClassNotFoundException {
+    public String updateCustomer(CustomerRequestDTO dto, String id) throws ClassNotFoundException {
         Optional<Customer> byId = customerRepo.findById(id);
 
         if(byId.isPresent()) {
@@ -65,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String deleteCustomer(int id) {
+    public String deleteCustomer(String id) {
 
         customerRepo.deleteById(id);
         return id+ "was deleted";

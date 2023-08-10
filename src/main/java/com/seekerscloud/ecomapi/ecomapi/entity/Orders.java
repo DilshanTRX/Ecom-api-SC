@@ -23,7 +23,6 @@ public class Orders {
     private Date orderDate;
     @Column(name = "cost")
     private double cost;
-
     @ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customerId;
@@ -31,10 +30,17 @@ public class Orders {
     @JoinColumn(name = "user_id")
     private User userId;
 
-
     @OneToMany(mappedBy = "orderOrderId")
-    private List<Order_Has_Item> orderOrderId;
+    private List<OrderHasItem> orderOrderId;
 
     @OneToOne(mappedBy = "orderOrderId")
     private Payment paymentId;
+
+    public Orders(String orderId, Date orderDate, double cost, Customer customerId, User userId) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.cost = cost;
+        this.customerId = customerId;
+        this.userId = userId;
+    }
 }
