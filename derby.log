@@ -1,0 +1,29 @@
+----------------------------------------------------------------
+Sun Aug 13 12:14:29 IST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0189-eda3-9c43-00000407f710 
+on database directory memory:/Users/dilshanfernando/Downloads/Ecom-api/c81e43b3-6a3b-4243-a0a7-c077aa2b3808 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+Loaded from file:/Users/dilshanfernando/.m2/repository/com/innoventsolutions/birt/runtime/org.apache.derby_10.11.1.1_v201605202053/4.8.0/org.apache.derby_10.11.1.1_v201605202053-4.8.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.2+8-86
+user.dir=/Users/dilshanfernando/Downloads/Ecom-api
+os.name=Mac OS X
+os.arch=x86_64
+os.version=13.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sun Aug 13 12:14:30 IST 2023:
+Shutting down instance a816c00e-0189-eda3-9c43-00000407f710 on database directory memory:/Users/dilshanfernando/Downloads/Ecom-api/c81e43b3-6a3b-4243-a0a7-c077aa2b3808 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+----------------------------------------------------------------
+Sun Aug 13 12:14:30 IST 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance f55fc0a6-0189-eda3-9c43-00000407f710 
+on database directory memory:/Users/dilshanfernando/Downloads/Ecom-api/c81e43b3-6a3b-4243-a0a7-c077aa2b3808 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@251a69d7 
+Loaded from file:/Users/dilshanfernando/.m2/repository/com/innoventsolutions/birt/runtime/org.apache.derby_10.11.1.1_v201605202053/4.8.0/org.apache.derby_10.11.1.1_v201605202053-4.8.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.2+8-86
+user.dir=/Users/dilshanfernando/Downloads/Ecom-api
+os.name=Mac OS X
+os.arch=x86_64
+os.version=13.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
